@@ -17,7 +17,6 @@ docs/_build/
 
 # PyTest
 .pytest_cache/
-__pycache__/
 pytest.ini
 
 # virtualenv
@@ -25,7 +24,6 @@ app/venv/
 
 # IntelliJ
 /out/
-.idea/
 
 # Byte-compiled / optimized / DLL files
 v2_indexcache/
@@ -61,8 +59,6 @@ pip-delete-this-directory.txt
 *_REMOTE_*
 
 # Unit test / coverage reports
-htmlcov/
-.tox/
 .coverage
 .coverage.*
 .cache
