@@ -31,3 +31,11 @@ class CustomerService:
             return {'message': f'Customer with id {customer_id} deleted.'}
         else:
             return False
+
+    @staticmethod
+    def get_with_favorites():
+        customers = CustomerDAO.get_favourites_establishments()
+        return [customer.to_dict(include_favorities=True) for customer in customers]
+
+
+

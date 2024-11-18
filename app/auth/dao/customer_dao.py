@@ -1,3 +1,5 @@
+from sqlalchemy.orm import joinedload
+
 from app.auth.domain.models import Customer
 from app import db
 
@@ -31,3 +33,9 @@ class CustomerDAO:
     def delete_customer(customer):
         db.session.delete(customer)
         db.session.commit()
+
+    @staticmethod
+    def get_favourites_establishments():
+         return db.session.query(Customer).options(
+            joinedload(Customer.favourites_establishments)
+        ).all()

@@ -28,3 +28,9 @@ class CustomerController:
     def delete_customer(customer_id):
         success = CustomerService.delete_customer(customer_id)
         return (jsonify(success), 204) if success else (jsonify({'message': 'Customer not found.'}), 404)
+
+
+    @staticmethod
+    def get_favorite_customer():
+        data = CustomerService.get_with_favorites()
+        return jsonify(data)

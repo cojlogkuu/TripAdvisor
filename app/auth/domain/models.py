@@ -32,13 +32,18 @@ class Customer(Base):
     reviews = relationship('Review', back_populates='customer', cascade="all, delete-orphan")
     security = relationship('Security', back_populates='customer')
 
-    def to_dict(self):
-        return {
+    def to_dict(self, include_favorities=False):
+        data =  {
             "id": self.id,
             "name": self.name,
             "email": self.email,
             "phone": self.phone,
         }
+
+        if include_favorities:
+            data['favourites_establishments'] = [est.to_dict() for est in self.favourites_establishments]
+
+        return data
 
 class Security(Customer):
     __tablename__ = 'security'
