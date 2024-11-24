@@ -8,3 +8,6 @@ establishment_bp.add_url_rule('/establishments', 'get_all_establishments', Estab
 establishment_bp.add_url_rule('/establishments', 'create_establishment', EstablishmentController.create_establishment, methods=['POST'])
 establishment_bp.add_url_rule('/establishments/<int:establishment_id>', 'update_establishment', EstablishmentController.update_establishment, methods=['PUT'])
 establishment_bp.add_url_rule('/establishments/<int:establishment_id>', 'delete_establishment', EstablishmentController.delete_establishment, methods=['DELETE'])
+establishment_bp.add_url_rule('/establishments/max_rating', 'get_max_rating_establishments', EstablishmentController.get_max_rating_establishment, methods=['GET'])
+establishment_bp.add_url_rule('/establishments/random', 'create_random_establishment_tables', EstablishmentController.create_random_establishment_tables, methods=['POST'])
+

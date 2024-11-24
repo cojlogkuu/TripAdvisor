@@ -28,3 +28,19 @@ class EstablishmentController:
     def delete_establishment(establishment_id):
         success = EstablishmentService.delete_establishment(establishment_id)
         return (jsonify(success), 204) if success else (jsonify({'message': 'Establishment not found.'}), 404)
+
+    @staticmethod
+    def get_max_rating_establishment():
+        result = EstablishmentService.get_max_rating_establishment()
+        if result:
+            return jsonify(result), 201
+        else:
+            return jsonify({'message': 'Error executing stored procedure.'}), 404
+
+    @staticmethod
+    def create_random_establishment_tables():
+        result = EstablishmentService.create_random_establishment_tables()
+        if result:
+            return jsonify(result), 201
+        else:
+            return jsonify({'message': 'Error executing stored procedure.'}), 404

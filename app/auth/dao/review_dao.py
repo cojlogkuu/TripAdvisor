@@ -1,5 +1,6 @@
 from app.auth.domain.models import Review
 from app import db
+from sqlalchemy import text as sql_text
 
 
 class ReviewDAO:
@@ -41,3 +42,22 @@ class ReviewDAO:
     def delete_review(review):
         db.session.delete(review)
         db.session.commit()
+
+    @staticmethod
+    def insert_review_using_procedure(customer_id, establishment_id, text, rating):
+        try:
+            sql = sql_text("CALL insert_review(:customer_id, :establishment_id, :text, :rating)")
+            db.session.execute(sql,
+                {
+                    'customer_id': customer_id,
+                    'establishment_id': establishment_id,
+                    'text': text,
+                    'rating': rating
+                }
+            )
+            db.session.commit()
+            return True
+        except Exception as e:
+            db.session.rollback()
+            print(f"Error executing stored procedure: {e}")
+            return False

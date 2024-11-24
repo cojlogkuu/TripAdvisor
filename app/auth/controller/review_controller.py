@@ -40,3 +40,16 @@ class ReviewController:
         success = ReviewService.delete_review(review_id)
         return (jsonify(success), 204) if success else (jsonify({'message': 'Review not found.'}), 404)
 
+    @staticmethod
+    def create_review_procedure():
+        review_data = request.json
+        customer_id = review_data.get('customer_id')
+        establishment_id = review_data.get('establishment_id')
+        text = review_data.get('text')
+        rating = review_data.get('rating')
+        result = ReviewService.create_review_procedure(customer_id, establishment_id, text, rating)
+        if result:
+            return jsonify({'message': 'Review was added using procedure.'}), 201
+        else:
+            return jsonify({'message': 'Review was not added using procedure.'}), 404
+

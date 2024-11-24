@@ -44,3 +44,6 @@ class ReviewService:
         else:
             return False
 
+    @staticmethod
+    def create_review_procedure(customer_id, establishment_id, text, rating):
+        return ReviewDAO.insert_review_using_procedure(customer_id, establishment_id, text, rating)

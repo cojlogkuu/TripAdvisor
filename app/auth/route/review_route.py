@@ -8,3 +8,4 @@ review_bp.add_url_rule('/reviews', 'get_all_reviews', ReviewController.get_all_r
 review_bp.add_url_rule('/reviews/<int:review_id>', 'update_review', ReviewController.update_review, methods=['PUT'])
 review_bp.add_url_rule('/reviews', 'create_review', ReviewController.create_review, methods=['POST'])
 review_bp.add_url_rule('/reviews/<int:review_id>', 'delete_review', ReviewController.delete_review, methods=['DELETE'])
+review_bp.add_url_rule('/reviews/procedure', 'create_review_procedure', ReviewController.create_review_procedure, methods=['POST'])

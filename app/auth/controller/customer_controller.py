@@ -34,3 +34,28 @@ class CustomerController:
     def get_favorite_customer():
         data = CustomerService.get_with_favorites()
         return jsonify(data)
+
+    @staticmethod
+    def add_favourites_establishment():
+        data = request.json
+
+        customer = data.get('customer')
+        establishment = data.get('establishment')
+
+        if not customer or not establishment:
+            return jsonify({"message": "Both customer and establishment are required"}), 400
+
+        result = CustomerService.add_favourites_establishment(customer, establishment)
+
+        if result:
+            return jsonify({"message": f"{establishment} was set as favourite for {customer}"}), 201
+        else:
+            return jsonify({"message": f"{establishment} was not set"}), 401
+
+    @staticmethod
+    def add_multiple_customers():
+        result = CustomerService.add_multiple_customers()
+        if result:
+            return jsonify({"message": "Multiple customers were added."}), 201
+        else:
+            return jsonify({"message": f"Multiple customers were not added."}), 401

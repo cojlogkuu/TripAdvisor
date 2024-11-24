@@ -31,3 +31,11 @@ class EstablishmentService:
             return {'message': f'Establishment with id {establishment_id} deleted.'}
         else:
             return False
+
+    @staticmethod
+    def get_max_rating_establishment():
+        return EstablishmentDAO.get_max_rating_establishment()
+
+    @staticmethod
+    def create_random_establishment_tables():
+        return EstablishmentDAO.create_random_establishment_tables()

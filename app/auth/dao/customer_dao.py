@@ -1,5 +1,6 @@
+from flask import jsonify
 from sqlalchemy.orm import joinedload
-
+from sqlalchemy import text
 from app.auth.domain.models import Customer
 from app import db
 
@@ -39,3 +40,34 @@ class CustomerDAO:
          return db.session.query(Customer).options(
             joinedload(Customer.favourites_establishments)
         ).all()
+
+    @staticmethod
+    def add_favourites_establishment(customer, establishment):
+        try:
+            sql = text("""
+                    CALL insert_favourite_establishment(:customer_name, :establishment_name)
+                """)
+
+            db.session.execute(sql, {
+                'customer_name': customer,
+                'establishment_name': establishment
+            })
+
+            db.session.commit()
+            return True
+        except Exception:
+            db.session.rollback()
+            return False
+
+    @staticmethod
+    def add_multiple_customers():
+        try:
+            sql = text("CALL insert_multiple_customers()")
+            db.session.execute(sql)
+            db.session.commit()
+
+            return True
+
+        except Exception as e:
+            db.session.rollback()
+            return False

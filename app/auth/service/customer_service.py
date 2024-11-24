@@ -37,5 +37,13 @@ class CustomerService:
         customers = CustomerDAO.get_favourites_establishments()
         return [customer.to_dict(include_favorities=True) for customer in customers]
 
+    @staticmethod
+    def add_favourites_establishment(customer, establishment):
+        return CustomerDAO.add_favourites_establishment(customer, establishment)
+
+    @staticmethod
+    def add_multiple_customers():
+        return CustomerDAO.add_multiple_customers()
+
 
 
