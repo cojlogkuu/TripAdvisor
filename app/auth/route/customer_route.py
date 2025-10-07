@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, request
 from app.auth.controller.customer_controller import CustomerController
 
 customer_bp = Blueprint('customer', __name__)
@@ -11,4 +11,3 @@ customer_bp.add_url_rule('/customers/<int:customer_id>', 'update_customer', Cust
 customer_bp.add_url_rule('/customers/<int:customer_id>', 'delete_customer', CustomerController.delete_customer, methods=['DELETE'])
 customer_bp.add_url_rule('/customers/favourites', 'set_customers_with_favorites', CustomerController.add_favourites_establishment, methods=['POST'])
 customer_bp.add_url_rule('/customers/multiple', 'create_multiple_customer', CustomerController.add_multiple_customers, methods=['POST'])
-

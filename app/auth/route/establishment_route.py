@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, request
 from app.auth.controller.establishment_controller import EstablishmentController
 
 establishment_bp = Blueprint('establishment', __name__)
@@ -10,4 +10,3 @@ establishment_bp.add_url_rule('/establishments/<int:establishment_id>', 'update_
 establishment_bp.add_url_rule('/establishments/<int:establishment_id>', 'delete_establishment', EstablishmentController.delete_establishment, methods=['DELETE'])
 establishment_bp.add_url_rule('/establishments/max_rating', 'get_max_rating_establishments', EstablishmentController.get_max_rating_establishment, methods=['GET'])
 establishment_bp.add_url_rule('/establishments/random', 'create_random_establishment_tables', EstablishmentController.create_random_establishment_tables, methods=['POST'])
-

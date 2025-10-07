@@ -4,12 +4,13 @@ from yaml import safe_load
 from app.auth.route.customer_route import customer_bp
 from app.auth.route.establishment_route import establishment_bp
 from app.auth.route.review_route import review_bp
+from flasgger import Swagger
 
 from app import db
 
 app = Flask(__name__)
-
 CORS(app)
+Swagger(app)
 
 with open('config/app.yml', 'r') as file:
     config = safe_load(file)
@@ -24,4 +25,4 @@ app.register_blueprint(establishment_bp, url_prefix='/api')
 app.register_blueprint(review_bp, url_prefix='/api')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=5000)
