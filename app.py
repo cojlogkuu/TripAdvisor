@@ -1,22 +1,22 @@
 from flask import Flask
 from flask_cors import CORS
-from yaml import safe_load
 from app.auth.route.customer_route import customer_bp
 from app.auth.route.establishment_route import establishment_bp
 from app.auth.route.review_route import review_bp
 from flasgger import Swagger
+import os
+from dotenv import load_dotenv
 
 from app import db
+
+load_dotenv()
 
 app = Flask(__name__)
 CORS(app)
 Swagger(app)
 
-with open('config/app.yml', 'r') as file:
-    config = safe_load(file)
-
-app.config['SQLALCHEMY_DATABASE_URI'] = config['database']['uri']
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = config['database']['track_modifications']
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DB')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = os.getenv('SQLALCHEMY_TRACK_MODIFICATIONS', 'false').lower() == 'true'
 
 db.init_app(app)
 

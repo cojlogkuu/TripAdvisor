@@ -1,3 +1,0 @@
-database:
-  uri: "mysql+pymysql://root:qwerty1234@cloud-database-1.czsmekws60og.eu-north-1.rds.amazonaws.com:3306/tripadvisor2"
-  track_modifications: false

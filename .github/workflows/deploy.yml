@@ -26,10 +26,10 @@ jobs:
         run: |
           ssh -i ~/.ssh/github-actions-key -o StrictHostKeyChecking=no admin@${{ secrets.EC2_HOST }} << 'EOF'
           cd ./TripAdvisor
-          git pull origin main
-          sudo docker build -t tripadvisor:${{ github.sha }} .
+          git pull origin master
+          sudo docker build -t tripadvisor:latest .
           sudo docker stop tripadvisor_app || true
           sudo docker rm tripadvisor_app || true
-          sudo docker run -d --name tripadvisor_app -p 5000:5000 tripadvisor:${{ github.sha }}
+          sudo docker run -d --name tripadvisor_app -p 5000:5000 tripadvisor:latest
 
           EOF
