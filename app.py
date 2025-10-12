@@ -20,6 +20,10 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = os.getenv('SQLALCHEMY_TRACK_MODIF
 
 db.init_app(app)
 
+@app.route('/')
+def hello_world():
+    return 'hello world'
+
 app.register_blueprint(customer_bp, url_prefix='/api')
 app.register_blueprint(establishment_bp, url_prefix='/api')
 app.register_blueprint(review_bp, url_prefix='/api')
