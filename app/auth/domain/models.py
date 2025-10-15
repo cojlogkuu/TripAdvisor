@@ -45,13 +45,13 @@ class Customer(Base):
 
         return data
 
-class Security(Customer):
+class Security(Base):
     __tablename__ = 'security'
 
     customer_id = Column(ForeignKey('customer.id', ondelete='CASCADE'), primary_key=True)
-    password = Column(String(20), nullable=False)
+    password = Column(Text, nullable=False)
 
-    customer = relationship('Customer', back_populates='security', cascade="all, delete-orphan", single_parent=True)
+    customer = relationship('Customer', back_populates='security')
 
 
 class Owner(Base):

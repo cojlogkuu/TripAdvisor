@@ -21,7 +21,12 @@ class CustomerDAO:
         customer = Customer(**customer_data)
         db.session.add(customer)
         db.session.commit()
-        return customer.to_dict()
+        return customer
+
+    @staticmethod
+    def get_customer_by_email(email):
+        """Get customer by email"""
+        return db.session.query(Customer).filter_by(email=email).first()
 
     @staticmethod
     def update_customer(customer, update_data):

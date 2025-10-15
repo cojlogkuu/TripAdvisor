@@ -14,7 +14,8 @@ class CustomerService:
 
     @staticmethod
     def create_customer(customer_data):
-        return CustomerDAO.create_customer(customer_data)
+        customer = CustomerDAO.create_customer(customer_data)
+        return customer.to_dict()
 
     @staticmethod
     def update_customer(customer_id, update_data):

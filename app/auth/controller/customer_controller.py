@@ -1,14 +1,18 @@
 from flask import jsonify, request
 from app.auth.service.customer_service import CustomerService
+from app.auth.utils.jwt_utils import token_required
 
 class CustomerController:
     @staticmethod
+    @token_required
     def get_customer(customer_id):
         """
         Get a customer by ID
         ---
         tags:
           - Customers
+        security:
+          - Bearer: []
         parameters:
           - name: customer_id
             in: path
@@ -34,12 +38,15 @@ class CustomerController:
         return jsonify(customer) if customer else (jsonify({'message': 'Customer not found.'}), 404)
 
     @staticmethod
+    @token_required
     def get_all_customers():
         """
         Get all customers
         ---
         tags:
           - Customers
+        security:
+          - Bearer: []
         responses:
           200:
             description: List of customers
@@ -60,12 +67,15 @@ class CustomerController:
         return jsonify(customers)
 
     @staticmethod
+    @token_required
     def create_customer():
         """
         Create a new customer
         ---
         tags:
           - Customers
+        security:
+          - Bearer: []
         parameters:
           - name: body
             in: body
@@ -103,12 +113,15 @@ class CustomerController:
         return jsonify(customer), 201
 
     @staticmethod
+    @token_required
     def update_customer(customer_id):
         """
         Update a customer by ID
         ---
         tags:
           - Customers
+        security:
+          - Bearer: []
         parameters:
           - name: customer_id
             in: path
@@ -150,12 +163,15 @@ class CustomerController:
         return jsonify(customer) if customer else (jsonify({'message': 'Customer not found.'}), 404)
 
     @staticmethod
+    @token_required
     def delete_customer(customer_id):
         """
         Delete a customer by ID
         ---
         tags:
           - Customers
+        security:
+          - Bearer: []
         parameters:
           - name: customer_id
             in: path
@@ -177,12 +193,15 @@ class CustomerController:
         return (jsonify(success), 204) if success else (jsonify({'message': 'Customer not found.'}), 404)
 
     @staticmethod
+    @token_required
     def get_favorite_customer():
         """
         Get customers with favorite establishments
         ---
         tags:
           - Customers
+        security:
+          - Bearer: []
         responses:
           200:
             description: List of customers with favorites
@@ -207,12 +226,15 @@ class CustomerController:
         return jsonify(data)
 
     @staticmethod
+    @token_required
     def add_favourites_establishment():
         """
         Add favorite establishments for a customer
         ---
         tags:
           - Customers
+        security:
+          - Bearer: []
         parameters:
           - name: body
             in: body
@@ -253,12 +275,15 @@ class CustomerController:
             return jsonify({"message": f"{establishment} was not set"}), 401
 
     @staticmethod
+    @token_required
     def add_multiple_customers():
         """
         Create multiple customers
         ---
         tags:
           - Customers
+        security:
+          - Bearer: []
         parameters:
           - name: body
             in: body
